@@ -4,7 +4,7 @@
   "description": "ENTENDAI - Aplicacao simples com Cloudflare Pages Functions e Workers AI para explicar termos em portugues.",
   "type": "module",
   "scripts": {
-    "build": "node -e \"require('node:fs').accessSync('public/index.html')\"",
+    "build": "echo \"No build needed\"",
     "dev": "wrangler pages dev public --ai AI",
     "deploy": "wrangler pages deploy public --project-name entendai"
   },
