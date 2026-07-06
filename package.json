@@ -6,7 +6,7 @@
   "scripts": {
     "build": "echo \"No build needed\"",
     "dev": "wrangler pages dev public --ai AI",
-    "deploy": "npx wrangler pages deploy public --project-name entendai"
+    "deploy": "npx wrangler pages deploy public"
   },
   "devDependencies": {
     "wrangler": "^4.23.0"
