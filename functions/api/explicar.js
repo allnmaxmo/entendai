@@ -1,3 +1,5 @@
+const WORKER_URL = "https://entendai.allnmaxmo.workers.dev";
+
 const MODOS_VALIDOS = [
   "criança",
   "iniciante",
