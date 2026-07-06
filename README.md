@@ -1,18 +1,18 @@
 # ENTENDAI
 
-ENTENDAI e uma aplicacao web simples para explicar palavras, perguntas e ideias em portugues do Brasil usando Cloudflare Pages Functions e Cloudflare Workers AI.
+ENTENDAI é uma aplicação web simples para explicar palavras, perguntas e ideias em português do Brasil usando Cloudflare Pages Functions e Cloudflare Workers AI.
 
-A interface permite digitar um texto, escolher o estilo da explicacao e receber uma resposta curta, clara e adaptada ao modo escolhido.
+A interface permite digitar um texto, escolher o estilo da explicação e receber uma resposta curta, clara e adaptada ao modo escolhido.
 
 ## Recursos
 
-- Interface estatica em HTML, CSS e JavaScript.
+- Interface estática em HTML, CSS e JavaScript.
 - Layout responsivo com suporte a tema claro/escuro pelo sistema.
 - API serverless em Cloudflare Pages Functions.
-- Integracao com Workers AI pelo binding `AI`.
-- Modos de explicacao: `criança`, `iniciante`, `técnico`, `resumo` e `exemplo prático`.
-- Respostas em portugues do Brasil com limite curto de palavras.
-- Tratamento de carregamento, validacao e erros na interface.
+- Integração com Workers AI pelo binding `AI`.
+- Modos de explicação: `criança`, `iniciante`, `técnico`, `resumo` e `exemplo prático`.
+- Respostas em português do Brasil com limite curto de palavras.
+- Tratamento de carregamento, validação e erros na interface.
 
 ## Tecnologias
 
@@ -31,9 +31,9 @@ A interface permite digitar um texto, escolher o estilo da explicacao e receber 
 |       +-- explicar.js      # Rota POST /api/explicar
 +-- public/
 |   +-- index.html           # Interface web do ENTENDAI
-+-- package.json             # Scripts e dependencia do Wrangler
++-- package.json             # Scripts e dependência do Wrangler
 +-- package-lock.json
-+-- wrangler.jsonc           # Configuracao do Cloudflare Pages e binding AI
++-- wrangler.jsonc           # Configuração do Cloudflare Pages e binding AI
 +-- README.md
 ```
 
@@ -45,7 +45,7 @@ A interface permite digitar um texto, escolher o estilo da explicacao e receber 
 
 ## Como rodar localmente
 
-Instale as dependencias:
+Instale as dependências:
 
 ```bash
 npm install
@@ -71,7 +71,7 @@ wrangler pages dev public --ai AI
 npm run build
 ```
 
-Nao executa uma etapa de build, pois o projeto usa arquivos estaticos em `public/`.
+Não executa uma etapa de build, pois o projeto usa arquivos estáticos em `public/`.
 
 ```bash
 npm run dev
@@ -83,19 +83,19 @@ Roda o projeto localmente com Cloudflare Pages Functions e binding de Workers AI
 npm run deploy
 ```
 
-Publica o diretorio `public/` no Cloudflare Pages usando o projeto `entendai`.
+Publica o diretório `public/` no Cloudflare Pages usando o projeto `entendai`.
 
 ## API
 
 ### `POST /api/explicar`
 
-Recebe um texto e um modo de explicacao, chama o Workers AI e retorna uma explicacao curta.
+Recebe um texto e um modo de explicação, chama o Workers AI e retorna uma explicação curta.
 
-Exemplo de corpo da requisicao:
+Exemplo de corpo da requisição:
 
 ```json
 {
-  "termo": "o que e computacao em nuvem?",
+  "termo": "o que é computação em nuvem?",
   "modo": "iniciante"
 }
 ```
@@ -104,7 +104,7 @@ Exemplo de resposta:
 
 ```json
 {
-  "resposta": "Computacao em nuvem e usar servidores e servicos pela internet, sem precisar manter tudo no seu proprio computador."
+  "resposta": "Computação em nuvem é usar servidores e serviços pela internet, sem precisar manter tudo no seu próprio computador."
 }
 ```
 
@@ -116,19 +116,19 @@ Modos aceitos:
 - `resumo`
 - `exemplo prático`
 
-Se o modo enviado estiver ausente ou for invalido, a API usa `iniciante`.
+Se o modo enviado estiver ausente ou for inválido, a API usa `iniciante`.
 
-### Validacoes e erros
+### Validações e erros
 
-- A rota aceita apenas requisicoes `POST`.
-- O corpo deve ser JSON valido.
-- O campo `termo` deve ser uma string nao vazia.
-- Erros de validacao retornam status `400`.
-- Falhas ao gerar a resposta retornam status `500` com uma mensagem generica para o usuario.
+- A rota aceita apenas requisições `POST`.
+- O corpo deve ser JSON válido.
+- O campo `termo` deve ser uma string não vazia.
+- Erros de validação retornam status `400`.
+- Falhas ao gerar a resposta retornam status `500` com uma mensagem genérica para o usuário.
 
-## Configuracao Cloudflare
+## Configuração Cloudflare
 
-O arquivo `wrangler.jsonc` define o projeto Pages, o diretorio publicado e o binding de Workers AI:
+O arquivo `wrangler.jsonc` define o projeto Pages, o diretório publicado e o binding de Workers AI:
 
 ```jsonc
 {
@@ -142,13 +142,13 @@ O arquivo `wrangler.jsonc` define o projeto Pages, o diretorio publicado e o bin
 }
 ```
 
-A funcao em `functions/api/explicar.js` acessa o binding por `context.env.AI` e usa o modelo:
+A função em `functions/api/explicar.js` acessa o binding por `context.env.AI` e usa o modelo:
 
 ```text
 @cf/meta/llama-3.2-3b-instruct
 ```
 
-Se alterar bindings ou configuracoes do Wrangler, gere novamente os tipos quando necessario:
+Se alterar bindings ou configurações do Wrangler, gere novamente os tipos quando necessário:
 
 ```bash
 npx wrangler types
@@ -168,9 +168,9 @@ O script executa:
 npx wrangler pages deploy public --project-name entendai
 ```
 
-## Observacoes
+## Observações
 
-- A aplicacao nao possui build complexa; `public/index.html` concentra a interface, estilos e JavaScript do cliente.
-- A funcao serverless fica em `functions/api/explicar.js`.
-- A interface envia requisicoes para `/api/explicar` usando `fetch`.
-- O prompt da IA pede respostas em portugues do Brasil, com no maximo 80 palavras.
+- A aplicação não possui build complexa; `public/index.html` concentra a interface, estilos e JavaScript do cliente.
+- A função serverless fica em `functions/api/explicar.js`.
+- A interface envia requisições para `/api/explicar` usando `fetch`.
+- O prompt da IA pede respostas em português do Brasil, com no máximo 80 palavras.
