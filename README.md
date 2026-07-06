@@ -1,10 +1,43 @@
-# ENTENDAI
+<div align="center">
 
-ENTENDAI é uma aplicação web simples para explicar palavras, perguntas e ideias em português do Brasil usando Cloudflare Pages Functions e Cloudflare Workers AI.
+# 🧠 ENTENDAI
+
+**Explique palavras, perguntas e ideias em português do Brasil, de forma simples e direta.**
+
+![Cloudflare Pages](https://img.shields.io/badge/Cloudflare-Pages-F38020?style=flat&logo=cloudflare&logoColor=white)
+![Workers AI](https://img.shields.io/badge/Cloudflare-Workers%20AI-F38020?style=flat&logo=cloudflare&logoColor=white)
+![Wrangler](https://img.shields.io/badge/Wrangler-CLI-F38020?style=flat)
+![License](https://img.shields.io/badge/status-em%20desenvolvimento-blue)
+
+</div>
+
+---
+
+## 📖 Sobre o projeto
+
+ENTENDAI é uma aplicação web simples para explicar palavras, perguntas e ideias em português do Brasil usando **Cloudflare Pages Functions** e **Cloudflare Workers AI**.
 
 A interface permite digitar um texto, escolher o estilo da explicação e receber uma resposta curta, clara e adaptada ao modo escolhido.
 
-## Recursos
+---
+
+## 📑 Sumário
+
+- [Recursos](#-recursos)
+- [Tecnologias](#-tecnologias)
+- [Estrutura do projeto](#-estrutura-do-projeto)
+- [Requisitos](#-requisitos)
+- [Como rodar localmente](#-como-rodar-localmente)
+- [Scripts](#-scripts)
+- [API](#-api)
+- [Configuração Cloudflare](#-configuração-cloudflare)
+- [Deploy](#-deploy)
+- [Observações](#-observações)
+- [Autor](#-autor)
+
+---
+
+## ✨ Recursos
 
 - Interface estática em HTML, CSS e JavaScript.
 - Layout responsivo com suporte a tema claro/escuro pelo sistema.
@@ -14,36 +47,44 @@ A interface permite digitar um texto, escolher o estilo da explicação e recebe
 - Respostas em português do Brasil com limite curto de palavras.
 - Tratamento de carregamento, validação e erros na interface.
 
-## Tecnologias
+---
 
-- Cloudflare Pages
+## 🛠️ Tecnologias
+
+- [Cloudflare Pages](https://pages.cloudflare.com/)
 - Cloudflare Pages Functions
 - Cloudflare Workers AI
 - Wrangler
 - HTML, CSS e JavaScript puro
 
-## Estrutura do projeto
+---
+
+## 📂 Estrutura do projeto
 
 ```text
 .
-+-- functions/
-|   +-- api/
-|       +-- explicar.js      # Rota POST /api/explicar
-+-- public/
-|   +-- index.html           # Interface web do ENTENDAI
-+-- package.json             # Scripts e dependência do Wrangler
-+-- package-lock.json
-+-- wrangler.jsonc           # Configuração do Cloudflare Pages e binding AI
-+-- README.md
+├── functions/
+│   └── api/
+│       └── explicar.js      # Rota POST /api/explicar
+├── public/
+│   └── index.html           # Interface web do ENTENDAI
+├── package.json             # Scripts e dependência do Wrangler
+├── package-lock.json
+├── wrangler.jsonc            # Configuração do Cloudflare Pages e binding AI
+└── README.md
 ```
 
-## Requisitos
+---
+
+## ✅ Requisitos
 
 - Node.js e npm instalados.
 - Conta Cloudflare com acesso a Pages e Workers AI.
 - Wrangler instalado pelo projeto via `npm install`.
 
-## Como rodar localmente
+---
+
+## 🚀 Como rodar localmente
 
 Instale as dependências:
 
@@ -65,33 +106,25 @@ O comando de desenvolvimento executa:
 wrangler pages dev public --ai AI
 ```
 
-## Scripts
+---
 
-```bash
-npm run build
-```
+## 📜 Scripts
 
-Não executa uma etapa de build, pois o projeto usa arquivos estáticos em `public/`.
+| Comando | Descrição |
+|---|---|
+| `npm run build` | Não executa uma etapa de build, pois o projeto usa arquivos estáticos em `public/`. |
+| `npm run dev` | Roda o projeto localmente com Cloudflare Pages Functions e binding de Workers AI. |
+| `npm run deploy` | Publica o diretório `public/` no Cloudflare Pages usando o projeto `entendai`. |
 
-```bash
-npm run dev
-```
+---
 
-Roda o projeto localmente com Cloudflare Pages Functions e binding de Workers AI.
-
-```bash
-npm run deploy
-```
-
-Publica o diretório `public/` no Cloudflare Pages usando o projeto `entendai`.
-
-## API
+## 🔌 API
 
 ### `POST /api/explicar`
 
 Recebe um texto e um modo de explicação, chama o Workers AI e retorna uma explicação curta.
 
-Exemplo de corpo da requisição:
+**Exemplo de corpo da requisição:**
 
 ```json
 {
@@ -100,7 +133,7 @@ Exemplo de corpo da requisição:
 }
 ```
 
-Exemplo de resposta:
+**Exemplo de resposta:**
 
 ```json
 {
@@ -108,7 +141,7 @@ Exemplo de resposta:
 }
 ```
 
-Modos aceitos:
+**Modos aceitos:**
 
 - `criança`
 - `iniciante`
@@ -116,7 +149,7 @@ Modos aceitos:
 - `resumo`
 - `exemplo prático`
 
-Se o modo enviado estiver ausente ou for inválido, a API usa `iniciante`.
+> Se o modo enviado estiver ausente ou for inválido, a API usa `iniciante`.
 
 ### Validações e erros
 
@@ -126,7 +159,9 @@ Se o modo enviado estiver ausente ou for inválido, a API usa `iniciante`.
 - Erros de validação retornam status `400`.
 - Falhas ao gerar a resposta retornam status `500` com uma mensagem genérica para o usuário.
 
-## Configuração Cloudflare
+---
+
+## ⚙️ Configuração Cloudflare
 
 O arquivo `wrangler.jsonc` define o projeto Pages, o diretório publicado e o binding de Workers AI:
 
@@ -154,7 +189,9 @@ Se alterar bindings ou configurações do Wrangler, gere novamente os tipos quan
 npx wrangler types
 ```
 
-## Deploy
+---
+
+## 📦 Deploy
 
 Para publicar no Cloudflare Pages:
 
@@ -168,9 +205,17 @@ O script executa:
 npx wrangler pages deploy public --project-name entendai
 ```
 
-## Observações
+---
+
+## 📝 Observações
 
 - A aplicação não possui build complexa; `public/index.html` concentra a interface, estilos e JavaScript do cliente.
 - A função serverless fica em `functions/api/explicar.js`.
 - A interface envia requisições para `/api/explicar` usando `fetch`.
 - O prompt da IA pede respostas em português do Brasil, com no máximo 80 palavras.
+
+---
+
+## 👤 Autor
+
+Projeto desenvolvido por **Allan**.
