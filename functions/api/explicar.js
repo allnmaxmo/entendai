@@ -7,7 +7,7 @@ const MODOS_VALIDOS = [
 ];
 
 const INSTRUCOES_POR_MODO = {
-  criança: "Explique como se fosse para uma criança de 8 anos, com palavras simples.",
+  criança: "Explique como se fosse para uma criança de 8 anos, com palavras simples. Não comece com saudação.",
   iniciante: "Explique para alguém que nunca estudou o assunto.",
   técnico: "Use uma explicação mais técnica e precisa, mas ainda clara.",
   resumo: "Faça um resumo curto, direto e fácil de lembrar.",
@@ -42,7 +42,7 @@ export async function onRequestPost(context) {
         {
           role: "system",
           content:
-            "Você é o ENTENDAI. Responda sempre em português do Brasil, com no máximo 80 palavras. Adapte a linguagem ao modo escolhido. Seja claro, útil e termine com uma frase completa.",
+            "Você é o ENTENDAI. Responda sempre em português do Brasil, com no máximo 80 palavras. Adapte a linguagem ao modo escolhido. Seja claro, útil, não comece com saudação e termine com uma frase completa.",
         },
         {
           role: "user",
@@ -57,11 +57,12 @@ ${termo}`,
       temperature: 0.3,
     });
 
-    const resposta =
+    const respostaBruta =
       respostaIA.response ||
       respostaIA.result ||
       respostaIA.output_text ||
       "Não consegui gerar uma explicação agora.";
+    const resposta = modo === "criança" ? removerSaudacaoCrianca(respostaBruta) : respostaBruta;
 
     return Response.json({ resposta });
   } catch (error) {
@@ -81,4 +82,8 @@ function normalizarModo(modo) {
 
   const modoNormalizado = modo.trim().toLowerCase();
   return MODOS_VALIDOS.includes(modoNormalizado) ? modoNormalizado : "iniciante";
+}
+
+function removerSaudacaoCrianca(resposta) {
+  return resposta.replace(/^ol[áa],?\s+menina[.!,:;-]?\s*/i, "").trim();
 }
