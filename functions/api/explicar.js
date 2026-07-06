@@ -16,6 +16,24 @@ const INSTRUCOES_POR_MODO = {
   "exemplo prático": "Explique usando um exemplo prático do dia a dia.",
 };
 
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+
+    if (request.method === "OPTIONS") {
+      return new Response(null, { headers: CORS_HEADERS });
+    }
+
+    // Única rota de API deste projeto.
+    if (url.pathname === "/api/explicar" && request.method === "POST") {
+      return handleExplicar(request, env);
+    }
+
+    // Qualquer outra rota: deixa os assets estáticos (public/) responderem.
+    return env.ASSETS.fetch(request);
+  },
+};
+
 export async function onRequestPost(context) {
   let body;
 
