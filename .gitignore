@@ -13,6 +13,10 @@ lerna-debug.log*
 .prettierrc
 AGENTS.md
 package-lock.json
+.AGENTS/skills
+.skills
+.agents
+.skills-lock.json
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 
